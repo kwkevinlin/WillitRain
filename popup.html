@@ -4,19 +4,16 @@
 	<title>Will It Rain?</title>
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<div align="center" style="width:150px;"> 
 		<h1 id="h1Test">Will It Rain?</h1>
-		<p>Search Your City:
-			<input size="15" id="cityInput"></input>
-			<button id="findCityButton">Find</button>
-		</p>
-			<p>Confirm Your City:<br>
-			<select id="confirmDropdown"></select>
-		</p>
-		<button id="checkPage">Manual Check</button>
+		<div>
+			<p>Currently Selected City:
+				<input type="text" id="cityInput" style="text-align: center; width: 120px"></input>
+			</p>
+		</div>
+		<button id="searchWeather">Manual Check</button>
 		<p>
 			<label id="rainLabel"></label>
 		</p>
