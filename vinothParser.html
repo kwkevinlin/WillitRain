@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DAM Utility</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+	
+<div class = "container">
+<form id="jsonFile" enctype="multipart/form-data" method="post" role="form">
+ <h2>DAM - Utility Tool</h2>
+ <h3>Select the Brand Catalog File</h3>
+ <div>
+ <input type='file' id='fileinput'><br>
+ <input type='button' id='btnLoad' value='Load' onclick='loadFile();' class="btn-primary">
+ </div>
+</form><br>
+<pre id="fileDisplayArea"><pre>
+</div>
+<script type="text/javascript">
+
+  function loadFile() {
+    var input, file, fr;
+
+    if (typeof window.FileReader !== 'function') {
+      alert("The file API isn't supported on this browser yet.");
+      return;
+    }
+
+    input = document.getElementById('fileinput');
+    if (!input) {
+      alert("Um, couldn't find the fileinput element.");
+    }
+    else if (!input.files) {
+      alert("This browser doesn't seem to support the `files` property of file inputs.");
+    }
+    else if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+    }
+    else {
+      file = input.files[0];
+      fr = new FileReader();
+      fr.onload = receivedText;
+      fr.readAsText(file);
+    }
+
+    function receivedText(e) {
+      lines = e.target.result;
+      var newArr = JSON.parse(lines); 
+      fileDisplayArea.innerText+= "The following Premium IDs of " + newArr.mag_code + " have missing product display description" + '\n\n';
+      var pvar = newArr.product;
+
+		for (var i=0; i<pvar.length; i++){
+			if(pvar[i].product_display_description=="Lorem ipsum")
+			{
+				fileDisplayArea.innerText+=pvar[i].id + '\n'; 
+			}	    
+    	}
+    }
+  }
+</script>
+
+
+</body>
+</html>
