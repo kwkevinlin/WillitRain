@@ -4,12 +4,13 @@
 	<title>Will It Rain?</title>
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body>
-	<div align="center" style="width:150px;"> 
+	<div align="center" style="width:450px; height: 150px;"> <!-- width: 150px-->
 		<h1 id="h1Test">Will It Rain?</h1>
 		<div>
-			<p>Currently Selected City:
+			<p>Currently Selected City: 
 				<input type="text" id="cityInput" style="text-align: center; width: 120px"></input>
 			</p>
 		</div>
@@ -18,7 +19,8 @@
 			<label id="rainLabel"></label>
 		</p>
 	</div>
-	
+
+	<div id="weatherChart"></div>
 
 </body>
 </html>

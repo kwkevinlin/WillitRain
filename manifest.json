@@ -14,7 +14,5 @@
     "default_icon": "icons/icon19.png",
     "default_popup": "popup.html"
   },
-  "permissions": [
-    "http://api.openweathermap.org/*" 
-  ]
+  "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'"
 }
