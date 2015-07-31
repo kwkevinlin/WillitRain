@@ -29,7 +29,7 @@ $(document).ready(function() {
 			for (i = 0; i < weatherVar.length; i++) {
 				weatherVar[i][0] = data.list[i].weather[0].main;
 				weatherVar[i][1] = data.list[i].weather[0].description.charAt(0).toUpperCase() + data.list[i].weather[0].description.slice(1); //Capitalize first letter
-				weatherVar[i][2] = data.list[i].main.temp;
+				weatherVar[i][2] = data.list[i].main.temp+1; //For testing
 				weatherVar[i][3] = data.list[i].main.temp_min;
 				weatherVar[i][4] = data.list[i].main.temp_max;
 				weatherVar[i][5] = data.list[i].dt_txt;
@@ -85,7 +85,6 @@ function drawGraph() {
 			console.log(weatherVar[i][0] + " - " + weatherVar[i][1] + " - " + weatherVar[i][2] + " - " + weatherVar[i][3] + " - " + weatherVar[i][4] + " - " + weatherVar[i][5]);
 		}
 
-		//Axis not continous. Only 2 data sets showing (minus current)
 		data.addRows([
 			[new Date(weatherVar[0][5]), weatherVar[0][2], weatherVar[0][4], weatherVar[0][3]],
 			[new Date(weatherVar[1][5]), weatherVar[1][2], weatherVar[1][4], weatherVar[1][3]],
@@ -100,7 +99,13 @@ function drawGraph() {
 			[new Date(weatherVar[10][5]), weatherVar[10][2], weatherVar[10][4], weatherVar[10][3]]
 		]);
 
-		//Don't use Material Design, buggy
+		/*
+			Issues:
+			temp = temp_max
+			To Do:
+			Auto call API every 3 - 6 hours, ping users. Permissions: notification
+		*/
+
 		//https://developers.google.com/chart/interactive/docs/gallery/linechart#Configuration_Options
 		var options = {
 			chart: {
