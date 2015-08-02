@@ -17,5 +17,5 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com; object-src 'self'",
   "permissions": [
     "alarms", "notifications"
-  ],
+  ]
 }
