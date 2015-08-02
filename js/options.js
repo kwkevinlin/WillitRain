@@ -23,16 +23,38 @@ $('#save-options-button').on('click', function() {
         console.log("Local Storage 'cityName': " + checkFreq);
 
         $('#optionsSaved').show().delay(2000).fadeOut(2000);
+
+        //Clears existing alarm
+        chrome.alarms.clearAll();
+
+        //Initiate alarm
+        chrome.alarms.create("fetchAlarm", {
+                delayInMinutes: 1, periodInMinutes: 1
+                //delayInMinutes: checkFreq * 60, 
+                //periodInMinutes: checkFreq * 60
+            } 
+        );
+
+        chrome.alarms.onAlarm.addListener( function(alarm) {
+            console.log("Got an alarm!", alarm);
+            /*
+            if (buttongroup == "yes") 
+                callParseWeather;
+            */
+        });
+
     } else 
         $('#checkFreqError').show();
 
-
+});
 
     //Checklist
-    //Make a green checkbox appear after successful save
     //Combine options into popout page?
-    //If data returned list == 0 or something, "Error, city not found"
-    //Documentation for query searches
-    //Actually use own API
 
-});
+    //Separate parse data and display data
+
+    //Make Yes/No accented when selected
+    //Hide how often to check notify user only if yes selected
+
+    //Alarm not persistent yet
+

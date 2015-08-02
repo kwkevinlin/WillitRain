@@ -8,7 +8,6 @@ $(document).ready(function() {
 	$('#searchWeather').click(function() {
 		var cityParam = $('#cityInput').val();
 
-		var weatherJSON;
 		$.getJSON('http://api.openweathermap.org/data/2.5/forecast?q=' + cityParam + '&units=imperial', function(data) {
 			//http://api.openweathermap.org/data/2.5/forecast?q=new%20york,us&APPID=a51c4014680aa337f617628d6040187f&units=imperial
 

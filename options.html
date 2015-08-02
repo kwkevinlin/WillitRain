@@ -12,6 +12,8 @@
             <div style="padding: 8px">
                 <div style="font-size: 20px; line-height: 24px">Will it Rain?</div>
                 <div style="font-size: 16px; line-height: 20px">Configuration and Settings</div>
+
+                <!-- What Is Your City -->
                 <div style="margin-top: 10px">
                     <div class="control-group">
                         <label class="control-label">What Is Your City?</label>
@@ -20,9 +22,27 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Automatic Weather Notification -->
+                <div style="margin-top: 10px">
+                    <div class="control-group">
+                        <label class="control-label">Turn On Automatic Weather Notification?</label>
+                        <br>
+                        <div class="btn-group btn-group" role="group">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-success">Yes</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-danger">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How Often To Send User Notifications -->
                 <div style="margin-top: 10px">
                 <div class="control-group">
-                        <label class="control-label">How Often To Check For Rain?</label>
+                        <label class="control-label">How Often To Send User Notifications?</label>
                         <br>
                         <label style="font-weight:normal"><small><i>In hours (3 hours minimum)</small></i></label>
                         <div>
@@ -31,11 +51,12 @@
                         </div>
                     </div>
                 </div>
+
                 <p></p>
                 <button id="save-options-button" class="btn btn-success">Save Options</button>
                 <!--<label style="display: none">Options Saved</label>-->
                 <span id="optionsSaved" class="label label-success" style="display: none; margin-left: 35px">Options Saved</span>
-            </div>
+            
         </div>
         
         <!-- load javascript: unique html page javascript file -->
