@@ -14,5 +14,8 @@
     "default_icon": "icons/icon19.png",
     "default_popup": "popup.html"
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com; object-src 'self'",
+  "permissions": [
+    "alarms", "notifications"
+  ],
 }
