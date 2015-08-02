@@ -38,7 +38,6 @@ $('#save-options-button').on('click', function() {
         chrome.alarms.onAlarm.addListener( function(alarm) {
             console.log("Got an alarm!", alarm);
 
-
             //If weatherVar[i][0] == rain
             chrome.notifications.clear("notif");
             chrome.notifications.create("notif", {
@@ -47,6 +46,12 @@ $('#save-options-button').on('click', function() {
                 title: "Will It Rain?",
                 message: "Rain expected tomorrow!"
             });
+
+            chrome.notifications.onClicked.addListener(function (notifID) {
+                console.log("Notification clicked: " + notifID);
+                //open popup.html
+            });
+
         });
 
     } else 

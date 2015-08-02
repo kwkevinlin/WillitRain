@@ -1,58 +1,69 @@
 //Moving back to local later
 var weatherVar = new Array(11);
+var willRain = false;
+
+/*
+	To Do for popup.js
+	- Separate fetch data from popup display
+	- If last visit > 1 hr (?) away, refetch data and display
+	  else, display old data
+*/
 
 //When Document Ready
 $(document).ready(function() {
 	$('#cityInput').attr('value', localStorage.cityName);
 
 	$('#searchWeather').click(function() {
-		var cityParam = $('#cityInput').val();
 
-		$.getJSON('http://api.openweathermap.org/data/2.5/forecast?q=' + cityParam + '&units=imperial', function(data) {
-			//http://api.openweathermap.org/data/2.5/forecast?q=new%20york,us&APPID=a51c4014680aa337f617628d6040187f&units=imperial
+		//If last visit > 3 hr
+		fetchWeather();
 
-			/* 	2D array to hold parsed data. [][0]
-				[][0] = Weather status (rain)
-				[][1] = Weather description (moderate rain)
-				[][2] = Current temp (70 F)
-				[][3] = Current low
-				[][4] = Current high
-				[][5] = Data/time of caluclation, UTC
-			*/
-			//var weatherVar = new Array(11);
-			for (var i = 0; i < weatherVar.length; i++)
-				weatherVar[i] = new Array(6);
+		if (willRain === true) {
+			console.log("It is going to rain in the next 36 hours!");
+			$('#rainLabel').html("Yes, it will rain!");
+			willRain = false;
+		} else 
+			$('#rainLabel').html("No rain, hurray!");
 
-			var willRain = false;
-
-			for (i = 0; i < weatherVar.length; i++) {
-				weatherVar[i][0] = data.list[i].weather[0].main;
-				weatherVar[i][1] = data.list[i].weather[0].description.charAt(0).toUpperCase() + data.list[i].weather[0].description.slice(1); //Capitalize first letter
-				weatherVar[i][2] = data.list[i].main.temp+1; //For testing
-				weatherVar[i][3] = data.list[i].main.temp_min;
-				weatherVar[i][4] = data.list[i].main.temp_max;
-				weatherVar[i][5] = data.list[i].dt_txt;
-
-				if (data.list[i].weather[0].main == "Rain") {
-					willRain = true;
-				}
-			}
-
-			if (willRain === true) {
-				console.log("It is going to rain in the next 36 hours!");
-				$('#rainLabel').html("Yes, it will rain!");
-			} else {
-				$('#rainLabel').html("No rain, hurray!");
-			}
-
-			drawGraph();
-
-		}); //End getJSON()
-
-	}); //End findCityButton.click()
+		drawGraph();
+	}); 
 
 }); //End document.ready()
 
+
+function fetchWeather() {
+	var cityParam = $('#cityInput').val();
+
+	$.getJSON('http://api.openweathermap.org/data/2.5/forecast?q=' + cityParam + '&units=imperial', function(data) {
+		//http://api.openweathermap.org/data/2.5/forecast?q=new%20york,us&APPID=a51c4014680aa337f617628d6040187f&units=imperial
+
+		/* 	2D array to hold parsed data. [][0]
+			[][0] = Weather status (rain)
+			[][1] = Weather description (moderate rain)
+			[][2] = Current temp (70 F)
+			[][3] = Current low
+			[][4] = Current high
+			[][5] = Data/time of caluclation, UTC
+		*/
+		//var weatherVar = new Array(11);
+		for (var i = 0; i < weatherVar.length; i++)
+			weatherVar[i] = new Array(6);
+
+		for (i = 0; i < weatherVar.length; i++) {
+			weatherVar[i][0] = data.list[i].weather[0].main;
+			weatherVar[i][1] = data.list[i].weather[0].description.charAt(0).toUpperCase() + data.list[i].weather[0].description.slice(1); //Capitalize first letter
+			weatherVar[i][2] = data.list[i].main.temp+1; //For testing
+			weatherVar[i][3] = data.list[i].main.temp_min;
+			weatherVar[i][4] = data.list[i].main.temp_max;
+			weatherVar[i][5] = data.list[i].dt_txt;
+
+			if (data.list[i].weather[0].main == "Rain") {
+				willRain = true;
+			}
+		}
+
+	});
+}
 
 function drawGraph() {
 
