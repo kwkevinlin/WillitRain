@@ -37,10 +37,16 @@ $('#save-options-button').on('click', function() {
 
         chrome.alarms.onAlarm.addListener( function(alarm) {
             console.log("Got an alarm!", alarm);
-            /*
-            if (buttongroup == "yes") 
-                callParseWeather;
-            */
+
+
+            //If weatherVar[i][0] == rain
+            chrome.notifications.clear("notif");
+            chrome.notifications.create("notif", {
+                type: "basic",
+                iconUrl: "icons/icon48.png",
+                title: "Will It Rain?",
+                message: "Rain expected tomorrow!"
+            });
         });
 
     } else 
