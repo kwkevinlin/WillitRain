@@ -15,8 +15,22 @@ $(document).ready(function() {
 
 	$('#searchWeather').click(function() {
 
-		//If last visit > 3 hr
-		fetchWeather();
+		//If input city name changed
+		if (localStorage.currentCity != $('#cityInput').val()) {
+			console.log("Fetching new");
+			fetchWeather();
+		} else {
+			//If city not changed, only allow updating every 1.5 hours
+			if (Date.now() > localStorage.lastChecked + 5400000) {
+				console.log("Fetching new");
+				fetchWeather();
+			}
+			else {
+				//Use existing data
+				console.log("Using old data");
+				weatherVar = JSON.parse(localStorage.weatherObj);
+			}
+		}
 
 		if (willRain === true) {
 			console.log("It is going to rain in the next 36 hours!");
@@ -33,6 +47,7 @@ $(document).ready(function() {
 
 function fetchWeather() {
 	var cityParam = $('#cityInput').val();
+	localStorage.currentCity = cityParam;
 
 	$.getJSON('http://api.openweathermap.org/data/2.5/forecast?q=' + cityParam + '&units=imperial', function(data) {
 		//http://api.openweathermap.org/data/2.5/forecast?q=new%20york,us&APPID=a51c4014680aa337f617628d6040187f&units=imperial
@@ -61,6 +76,8 @@ function fetchWeather() {
 				willRain = true;
 			}
 		}
+
+		localStorage.weatherObj = JSON.stringify(weatherVar);
 
 	});
 }

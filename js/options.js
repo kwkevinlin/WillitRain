@@ -49,7 +49,7 @@ $('#save-options-button').on('click', function() {
 
             chrome.notifications.onClicked.addListener(function (notifID) {
                 console.log("Notification clicked: " + notifID);
-                //open popup.html
+                //Disable clicking?
             });
 
         });
